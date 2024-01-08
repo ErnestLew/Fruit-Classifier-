@@ -6,6 +6,7 @@ import torchvision.models as models
 from torch import nn
 import os
 import requests
+from torchvision.models import VGG16_Weights
 
 data_transforms = {
     'train': transforms.Compose([
@@ -18,7 +19,7 @@ data_transforms = {
 
 # Define the model architecture - VGG16
 def initialize_model(num_classes):
-    model = models.vgg16(pretrained=True)
+    model = models.vgg16(weights=VGG16_Weights.DEFAULT)
     for param in model.features.parameters():
         param.requires_grad = False
     num_features = model.classifier[6].in_features
